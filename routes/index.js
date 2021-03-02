@@ -11,8 +11,8 @@ const postsWithNextRowCheck = posts => posts.map((post, index) => {
 })
 
 router.get("/", (req, res) => {
-    res.render("index")
-})
+    res.render("index", {active: {home: true}});
+});
 
 router.get("/api/posts", (req, res) => {
     db.Posts.findAll().then( dbdump => {
@@ -29,7 +29,7 @@ router.get("/foodrink", (req, res) => {
         },
         raw : true
     }).then(posts => {
-        res.render("FoodDrink", { posts: postsWithNextRowCheck(posts) })
+        res.render("FoodDrink", { posts: postsWithNextRowCheck(posts), active: {foodrink: true}});
 })
     .catch(() => res.redirect("/"))
 })
